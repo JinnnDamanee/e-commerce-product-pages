@@ -3,12 +3,10 @@ import { useState } from "react";
 import ImageSource from "./ImageSource";
 import { MdKeyboardArrowLeft,MdKeyboardArrowRight } from "react-icons/md";
 import useWindowDimensions from "./useWindowDimension";
-import { maxHeaderSize } from "http";
 
 const ImageView = () => {
     const [pages, setPages] = useState(1);
     const [showOverlay, setOverlay] = useState(false);
-
 
     const pageHandler = (direction) => {
         const newPages = direction==='next'?(pages+1)%5:(pages-1)%5
@@ -35,34 +33,34 @@ const ImageView = () => {
                         <MdKeyboardArrowRight className="navigate-icon -translate-x-4" onClick={()=>pageHandler('next')}/>
                     </main>
                     <div className="flex items-center justify-center m-8">
-                        <span
+                        <div
                             className={`image-sm-view ${pages === 1 ? "image-current" : 'border-0'
                                 }`}
                             onClick={() => setPages(1)}
                         >
                             <Image src={ImageSource.thumbnail1} alt="shoetn1" />
-                        </span>
-                        <span
+                        </div>
+                        <div
                             className={`image-sm-view ${pages === 2 ? "image-current" : 'border-0'
                                 }`}
                             onClick={() => setPages(2)}
                         >
                             <Image src={ImageSource.thumbnail2} alt="shoetn2" />
-                        </span>
-                        <span
+                        </div>
+                        <div
                             className={`image-sm-view ${pages === 3 ? "image-current" : 'border-0'
                                 }`}
                             onClick={() => setPages(3)}
                         >
                             <Image src={ImageSource.thumbnail3} alt="shoetn3" />
-                        </span>
-                        <span
+                        </div>
+                        <div
                             className={`image-sm-view mr-0 ${pages === 4 ? "image-current" : 'border-0'
                                 }`}
                             onClick={() => setPages(4)}
                         >
                             <Image src={ImageSource.thumbnail4} alt="shoetn4" />
-                        </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,8 +70,12 @@ const ImageView = () => {
         return (
             <>
                 <div className="absolute">
-                    <div className="cursor-pointer object-contain" onClick={() => setOverlay(true)}>
+                    <div className="cursor-pointer object-contain">
                         <Image src={ImageSource[`shoe${pages}`]} alt="shoeBig"/>
+                    </div>
+                    <div className="flex w-screen justify-between px-4 absolute -translate-y-52">
+                        <MdKeyboardArrowLeft className="navigate-icon" onClick={()=>pageHandler('back')}/>
+                        <MdKeyboardArrowRight className="navigate-icon" onClick={()=>pageHandler('next')}/>
                     </div>
                 </div>
                 {showOverlay && <ImageOverlay />}
@@ -84,35 +86,35 @@ const ImageView = () => {
         return (
             <>
                 <div className="flex flex-col w-[30vw] md:my-4">
-                    <span className="image-lg-view" onClick={() => setOverlay(true)}>
+                    <div className="image-lg-view" onClick={() => setOverlay(true)}>
                         <Image src={ImageSource[`shoe${pages}`]} alt="shoeBig" />
-                    </span>
+                    </div>
                     <div className="flex mt-6 w-full">
-                        <span
+                        <div
                             className={`image-sm-view ${pages === 1 ? "image-current" : null}`}
                             onClick={() => setPages(1)}
                         >
                             <Image src={ImageSource.thumbnail1} alt="shoetn1" />
-                        </span>
-                        <span
+                        </div>
+                        <div
                             className={`image-sm-view ${pages === 2 ? "image-current" : null}`}
                             onClick={() => setPages(2)}
                         >
                             <Image src={ImageSource.thumbnail2} alt="shoetn2" />
-                        </span>
-                        <span
+                        </div>
+                        <div
                             className={`image-sm-view ${pages === 3 ? "image-current" : null}`}
                             onClick={() => setPages(3)}
                         >
                             <Image src={ImageSource.thumbnail3} alt="shoetn3" />
-                        </span>
-                        <span
+                        </div>
+                        <div
                             className={`image-sm-view mr-0 ${pages === 4 ? "image-current" : null
                                 }`}
                             onClick={() => setPages(4)}
                         >
                             <Image src={ImageSource.thumbnail4} alt="shoetn4" />
-                        </span>
+                        </div>
                     </div>
                 </div>
                 {showOverlay && <ImageOverlay />}

@@ -1,23 +1,35 @@
 import '../styles/globals.css'
-import { createContext, Suspense, useContext } from 'react'
+import { createContext, useContext, useEffect } from 'react'
 import { useState } from 'react';
 
+const CartContext = createContext(null);
 
-const cartContext = createContext(null);
 export const useCartContext = () => {
-  return useContext(cartContext);
+  return useContext(CartContext);
 }
 
 function MyApp({ Component, pageProps }) {
   const [amount,setAmount] = useState(1);
+  
+  // Get rid of Hydration
+  const [showChild, setShowChild] = useState(false);
+  useEffect(() => {
+    setShowChild(true);
+  }, []);
 
-  return (
-      <cartContext.Provider value={{amount,setAmount}}>
-        <Suspense>
+  if (!showChild) {
+    return null;
+  }
+  
+  if (typeof window === 'undefined') {
+    return <></>;
+  } else {
+    return (
+      <CartContext.Provider value={{amount,setAmount}}>
           <Component {...pageProps} />
-        </Suspense>
-      </cartContext.Provider>
-  )
+      </CartContext.Provider>
+    )
+  }
 }
 
 export default MyApp

@@ -41,7 +41,7 @@ const Navbar = () => {
                 <div className='flex items-center'>
                     <button className={`group flex items-center duration-150 hover:scale-105 active:translate-y-1 cursor-pointer`} onClick={() => setShowCart(!ShowCart)}>
                         <ImageSource.cart />
-                        <span className={`bg-orange text-xs text-white px-1 rounded-full relative w-8 -top-2 right-2 duration-200 ${amount === 0 ? 'scale-0' : 'scale-100'}`}>{amount}</span>
+                        <div className={`bg-orange text-xs text-white px-1 rounded-full relative w-8 -top-2 right-2 duration-200 ${amount === 0 ? 'scale-0' : 'scale-100'}`}>{amount}</div>
                     </button>
                     <div className='ml-4 border-white hover:border-orange border-2 rounded-full duration-150 active:translate-y-1 cursor-pointer mr-6 lg:mr-0 w-10 lg:w-16 '>
                         <Image src={ImageSource.avatar} alt='user' />
